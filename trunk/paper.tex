@@ -336,21 +336,49 @@ the limited resources to enhance system performance. The hardware
 reconfiguration is further facilitated by software prediction engine. Rather
 than conventional last value predictors and table-based predictors, we employ a
 probablity-based predictor that can achieve higher accuracy with small
-performance overhead.
+performance overhead. The rest of this section describes the BROM design, which
+is composed of on-chip memory hierarchy hardware design, the reconfiguration
+mechanism, and the predictor engine.
 
 \subsection{Memory Hierarchy Design}
 
+hardware design: num of levels; memory technology of each level; size of each level
 
+reconfiguration support: how reconfigurable (Li -> Li+1 (Li+0.5); hardware
+modification to support reconfiguration; what to do with reconfigured capacity
 
 \subsection{Reconfiguration}
 
-tailoring mode
-reuse mode
+
+decide size of each level si:
+
+1) theoritical curves
+
+2) bound:
+ 
+- dbwi < pbwi -> si <= s1
+
+- max throughput under power budget? -> si >= s2
+
+- si <= hardware given max si
+
+- si > si-1
+
+reconfigure the unused capacity:
+
+- if (> si): becomes si+1
+
+- else: unused (or becomes lut)
+
+
 
 \subsection{Prediction Engine}
 
 statistical prediction
-performance opt
+
+hierarchical prediction
+
+performance opt: lut long enough but not too long (num of entries, bits per entry)
 
 % -------------------------------------------------------------------------
 \section{Experiments}
