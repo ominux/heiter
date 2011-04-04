@@ -29,10 +29,10 @@
   In future chip-multiprocessor~(CMP) design, memory bandwidth is a potential
   bottleneck to system performance. Emerging non-volatile memory technologies,
   such as spin-torque-transfer memory~(STT-RAM), resistive memory~(RRAM), and
-  embedded DRAM~(eDRAM), are promising solutions as on-chip cache and memory for
-  CMPs. In this paper, we propose a bandwidth-aware reconfigurable memory
-  hierarchy design with hybrid memory technologies. We demonstrate a method to
-  dynamically reconfigure the number of shared memory levels and capacity of
+  embedded DRAM~(eDRAM), are promising solutions as on-chip memories for CMPs.
+  In this paper, we propose a bandwidth-aware reconfigurable on-chip
+  memory~(BROM) design with hybrid memory technologies. We demonstrate a method
+  to dynamically reconfigure the number of shared memory levels and capacity of
   each level based on statistical prediction. With a set of both multithreaded
   and multiprogrammed applications, we evaluate system performance obtained with
   our method. The experimental results show that the proposed reconfigurable
@@ -135,16 +135,18 @@ workloads. Cache resources are allocated with the objective that the overall
 system bandwidth requirement is minimized for the target workload. The key
 insight is that cache miss-rate information may severely misrepresent the actual
 bandwidth demand of the task, which ultimately determines the overall system
-performance and power consumption.
+performance and power consumption. <the moguls paper, the figure 1, however design for
+induvidual application, i.e., with different application can generate different
+designs.>
 
 A large body of recent research focuses on exploring new memory technologies to
 trade off between latency, bandwidth, and cost. Wu et al. explored various
 memory technologies - SRAM, eDRAM [23], magnetic RAM (MRAM) [12] and PCM to best
 construct L3 caches in terms of performance and power [24]. The eDRAM and MRAM
-technologies are evaluated as last-level caches by stacking each memory on top
-of the processor die. Both studies mainly focus on reducing the latency gap
-between L2 cache and external memory and do not examine the bandwidth. <nvm
-cache research: most for latency, not bandwidth-aware opt.>
+technologies are evaluated as LLCs by stacking each memory on top of the
+processor die. Both studies mainly focused on reducing the latency gap between L2
+cache~(LLC) and external memory and do not examine the bandwidth. <nvm cache
+research: most for latency, not bandwidth opt.>
 
 
 Application behavior prediction is a critical component of reconfigurable
@@ -319,13 +321,34 @@ capacity. For example,
 % -------------------------------------------------------------------------
 \section{Design Method}
 
+While many design methods envolved with new memory technologies endeavor to
+reduce the memory access latency of going off-chip, this work employs the hybrid
+on-chip memory and reconfiguration to minimize off-chip bandwidth requirement.
+For each level of memory, we select the memory technology that has the highest
+provided bandwidth within given capacity. On top of such hardware hierarchy
+design, we apply dynamic memory system reconfiguration that awares of the
+bandwidth demand of a specific set of applications. 
+
+
+
+Based on our memory technology exploration, we now provide an overview of our
+bandwidth-aware architecture (Section~\ref{sec:hierarchy}) , and then discuss the details on the hardware
+support (Section 3.2) and OS support (Section 3.3) required for achieving high
+performance on this architecture.
+
 \subsection{Memory Hierarchy Design}
 
 
 
 \subsection{Reconfiguration}
 
-\subsection{Workload Behavior Prediction}
+tailoring mode
+reuse mode
+
+\subsection{Prediction Engine}
+
+statistical prediction
+performance opt
 
 % -------------------------------------------------------------------------
 \section{Experiments}
