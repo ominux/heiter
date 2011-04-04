@@ -321,20 +321,22 @@ capacity. For example,
 % -------------------------------------------------------------------------
 \section{Design Method}
 
-While many design methods envolved with new memory technologies endeavor to
-reduce the memory access latency of going off-chip, this work employs the hybrid
-on-chip memory and reconfiguration to minimize off-chip bandwidth requirement.
-For each level of memory, we select the memory technology that has the highest
-provided bandwidth within given capacity. On top of such hardware hierarchy
-design, we apply dynamic memory system reconfiguration that awares of the
-bandwidth demand of a specific set of applications. 
-
-
-
-Based on our memory technology exploration, we now provide an overview of our
-bandwidth-aware architecture (Section~\ref{sec:hierarchy}) , and then discuss the details on the hardware
-support (Section 3.2) and OS support (Section 3.3) required for achieving high
-performance on this architecture.
+Based on our memory technology exploration, we now provide an overview of BROM
+design. While many design methods envolved with new memory technologies endeavor
+to reduce the off-chip memory access latency, this work focuses on minimize
+off-chip bandwidth requirement by employing hybrid on-chip memory and
+reconfiguration. For each level of memory, we select the memory technology that
+has the highest provided bandwidth within given capacity. On top of such
+hardware hierarchy design, we apply dynamic memory system reconfiguration with
+the bandwidth demand of a specific set of applications as the major metric. One
+desirable characteristic of BROM is that it provides prioritized access to the
+residual memory capacity available at runtime instead of sharing it among all
+data flows. By having control over the residual capacity, we can better utilize
+the limited resources to enhance system performance. The hardware
+reconfiguration is further facilitated by software prediction engine. Rather
+than conventional last value predictors and table-based predictors, we employ a
+probablity-based predictor that can achieve higher accuracy with small
+performance overhead.
 
 \subsection{Memory Hierarchy Design}
 
