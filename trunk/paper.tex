@@ -31,7 +31,7 @@
   such as spin-torque-transfer memory~(STT-RAM), resistive memory~(RRAM), and
   embedded DRAM~(eDRAM), are promising solutions as on-chip memories for CMPs.
   In this paper, we propose a bandwidth-aware reconfigurable on-chip
-  memory~(BROM) design with hybrid memory technologies. We demonstrate a method
+  memory~(BAROM) design with hybrid memory technologies. We demonstrate a method
   to dynamically reconfigure the number of shared memory levels and capacity of
   each level based on statistical prediction. With a set of both multithreaded
   and multiprogrammed applications, we evaluate system performance obtained with
@@ -321,7 +321,7 @@ capacity. For example,
 % -------------------------------------------------------------------------
 \section{Design Method}
 
-Based on our memory technology exploration, we now provide an overview of BROM
+Based on our memory technology exploration, we now provide an overview of BAROM
 design. While many design methods envolved with new memory technologies endeavor
 to reduce the off-chip memory access latency, this work focuses on minimize
 off-chip bandwidth requirement by employing hybrid on-chip memory and
@@ -329,20 +329,50 @@ reconfiguration. For each level of memory, we select the memory technology that
 has the highest provided bandwidth within given capacity. On top of such
 hardware hierarchy design, we apply dynamic memory system reconfiguration with
 the bandwidth demand of a specific set of applications as the major metric. One
-desirable characteristic of BROM is that it provides prioritized access to the
+desirable characteristic of BAROM is that it provides prioritized access to the
 residual memory capacity available at runtime instead of sharing it among all
 data flows. By having control over the residual capacity, we can better utilize
 the limited resources to enhance system performance. The hardware
 reconfiguration is further facilitated by software prediction engine. Rather
 than conventional last value predictors and table-based predictors, we employ a
 probablity-based predictor that can achieve higher accuracy with small
-performance overhead. The rest of this section describes the BROM design, which
+performance overhead. The rest of this section describes the BAROM design, which
 is composed of on-chip memory hierarchy hardware design, the reconfiguration
 mechanism, and the predictor engine.
 
-\subsection{Memory Hierarchy Design}
+\subsection{Hardware Configuration}
 
-hardware design: num of levels; memory technology of each level; size of each level
+Figure~\ref{fig:hw-overview} shows an overview of BAROM hardware configuration.
+The CMP platform consists of multiple cores, where L1 cahces are private to each
+core and lower level caches are shared by the cores. With the provided bandwidth
+vs. capacity curves of various memory technologies that are obtained using the
+method described in section~\ref{sec:tech-explore}, we can design a hybrid
+on-chip memory system to always provide the highest bandwith. In order to
+achieve this goal, we configure the memory hierarchy in the following
+manner.\vspace{5pt}
+
+\noindent{}{\bf{Number of levels.}} In order to decide the number of memory
+levels, we examine the provided bandwidth curve. Memory levels are seperated by
+the cross points of two memory technologies. For example,
+Figure~\ref{fig:memory-bw} illustrates that there are two cross points (SRAM and
+STT-RAM, STT-RAM and RRAM). Therefore, we will have three levels of shared
+caches.\vspace{5pt}
+
+\noindent{}{\bf{Memory technology of each level.}} The memory technology with
+the highest provided bandwidth within the given range of capacity of each level
+is selected. In our case, SRAM, STT-RAM, and RRAM are selected as the L2, L3, and
+L4 caches respectively. As a result, the overall provided bandwidth curve of the
+on-chip memory system will appear to be an envelope line of all the available
+memory technologies as shown in Figure~\ref{fig:pbw-overall}.\vspace{5pt}
+
+\noindent{}{\bf{Capacity of each level.}} The maximum availabe capacity of each
+level is determined by the cross point of two memory technologies. In our case,
+the capacities of SRAM/L2, STT-RAM/L2, and RRAM/L4 are 2MB, 512MB, and 1GB
+respectively.\vspace{5pt}
+
+When the system is initially powered on, the capacity of each level is defined
+to be the maximum available capacity of the level.
+
 
 reconfiguration support: how reconfigurable (Li -> Li+1 (Li+0.5); hardware
 modification to support reconfiguration; what to do with reconfigured capacity
@@ -378,7 +408,8 @@ statistical prediction
 
 hierarchical prediction
 
-performance opt: lut long enough but not too long (num of entries, bits per entry)
+performance opt: lut long enough but not too long (num of entries, bits per
+entry)
 
 % -------------------------------------------------------------------------
 \section{Experiments}
