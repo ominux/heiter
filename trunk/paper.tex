@@ -361,10 +361,7 @@ caches.\vspace{5pt}
 \noindent{}{\bf{Memory technology of each level.}} The memory technology with
 the highest provided bandwidth within the given range of capacity of each level
 is selected. In our case, SRAM, STT-RAM, and RRAM are selected as the L2, L3,
-and L4 caches respectively. As a result, the overall provided bandwidth curve of
-the on-chip memory system will appear to be an envelope line of all the
-available memory technologies as shown in
-Figure~\ref{fig:pbw-envelope}.\vspace{5pt}
+and L4 caches respectively. \vspace{5pt}
 
 \noindent{}{\bf{Capacity of each level.}} The maximum availabe capacity of each
 level is determined by the cross point of two memory technologies. In our case,
@@ -375,11 +372,30 @@ reqirement of different applications, the capacities can be reconfigured at
 run-time to provide best performance. The memory space of each level can also be
 reconfigured to form an internal level as shown in Figure~\ref{fig:hw-config}.
 The hardware and software supports for reconfiguration will be presented in the
-following sections.
+following sections.\vspace{5pt}
+
+The goal of such architecture design is to make use of different memory
+technologies to configure an on-chip memory system with optimal provided
+bandwidth over a range of capacities. As a result, the overall provided
+bandwidth curve of the on-chip memory system will appear to be an envelope line
+of all the available memory technologies as illustrated in
+Figure~\ref{fig:pbw-envelope}. It is illustrated in this figure that the hybrid
+memory system always provides the highest bandwidth over different capacities.
 
 \subsection{Reconfiguration}
 
-When the system is initially powered on, 
+Although the above hybrid memory system maintains the optimal provided bandwidth
+curve over all the capacities, it does not garantee the best performance for
+different applications with a variety of bandwidth requirements. The overall
+provided bandwidth curve shown in Figure~\ref{fig:pbs-envelope} appears to be
+monotonically decreasing. A specific application may have a bandwidth
+requirement that can be mapped to a single point on the curve. To address this
+issue, we dynamically reconfigure the memory space of each level corresponding
+to the bandwidth requirement of each set of applications running on the system.
+To be more aggressive, the reconfiguration is applied at the end of each given
+time interval to accomodate different program phases of an application.
+
+
 
 reconfiguration support: how reconfigurable (Li -> Li+1 (Li+0.5); hardware
 modification to support reconfiguration; what to do with reconfigured capacity
