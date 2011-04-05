@@ -342,8 +342,8 @@ mechanism, and the predictor engine.
 
 \subsection{Hardware Configuration}
 
-Figure~\ref{fig:hw-overview} shows an overview of BAROM hardware configuration.
-The CMP platform consists of multiple cores, where L1 cahces are private to each
+Figure~\ref{fig:hw-config} shows an overview of BAROM hardware configuration.
+The CMP system consists of multiple cores, where L1 cahces are private to each
 core and lower level caches are shared by the cores. With the provided bandwidth
 vs. capacity curves of various memory technologies that are obtained using the
 method described in section~\ref{sec:tech-explore}, we can design a hybrid
@@ -360,24 +360,29 @@ caches.\vspace{5pt}
 
 \noindent{}{\bf{Memory technology of each level.}} The memory technology with
 the highest provided bandwidth within the given range of capacity of each level
-is selected. In our case, SRAM, STT-RAM, and RRAM are selected as the L2, L3, and
-L4 caches respectively. As a result, the overall provided bandwidth curve of the
-on-chip memory system will appear to be an envelope line of all the available
-memory technologies as shown in Figure~\ref{fig:pbw-overall}.\vspace{5pt}
+is selected. In our case, SRAM, STT-RAM, and RRAM are selected as the L2, L3,
+and L4 caches respectively. As a result, the overall provided bandwidth curve of
+the on-chip memory system will appear to be an envelope line of all the
+available memory technologies as shown in
+Figure~\ref{fig:pbw-envelope}.\vspace{5pt}
 
 \noindent{}{\bf{Capacity of each level.}} The maximum availabe capacity of each
 level is determined by the cross point of two memory technologies. In our case,
 the capacities of SRAM/L2, STT-RAM/L2, and RRAM/L4 are 2MB, 512MB, and 1GB
-respectively.\vspace{5pt}
+respectively. At the system initialization, the capacity of each level is
+defined to be the maximum available capacity of the level. According to the
+reqirement of different applications, the capacities can be reconfigured at
+run-time to provide best performance. The memory space of each level can also be
+reconfigured to form an internal level as shown in Figure~\ref{fig:hw-config}.
+The hardware and software supports for reconfiguration will be presented in the
+following sections.
 
-When the system is initially powered on, the capacity of each level is defined
-to be the maximum available capacity of the level.
+\subsection{Reconfiguration}
 
+When the system is initially powered on, 
 
 reconfiguration support: how reconfigurable (Li -> Li+1 (Li+0.5); hardware
 modification to support reconfiguration; what to do with reconfigured capacity
-
-\subsection{Reconfiguration}
 
 
 decide size of each level si:
