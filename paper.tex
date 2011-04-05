@@ -384,36 +384,47 @@ memory system always provides the highest bandwidth over different capacities.
 
 \subsection{Reconfiguration}
 
-Although the above hybrid memory system maintains the optimal provided bandwidth
-curve over all the capacities, it does not garantee the best performance for
-different applications with a variety of bandwidth requirements. The overall
-provided bandwidth curve shown in Figure~\ref{fig:pbs-envelope} appears to be
-monotonically decreasing. A specific application may have a bandwidth
-requirement that can be mapped to a single point on the curve. To address this
-issue, we dynamically reconfigure the memory space of each level corresponding
-to the bandwidth requirement of each set of applications running on the system.
-To be more aggressive, the reconfiguration is applied at the end of each given
-time interval to accomodate different program phases of an application.
+Although the above hybrid memory configuration maintains the optimal provided
+bandwidth curve over all the capacities, it does not garantee the best
+performance for different applications with a variety of bandwidth requirements.
+The overall provided bandwidth curve shown in Figure~\ref{fig:pbs-envelope}
+appears to be monotonically decreasing. A specific application may have a
+bandwidth requirement that can be mapped to a single point on the curve. In
+order to satisfy the bandwidth demand of different applications, we dynamically
+reconfigure the memory space of each level corresponding to the bandwidth
+requirement of each set of applications running on the system. To be more
+aggressive, the reconfiguration is applied at the end of each given execution
+time interval to accomodate different program phases of applications.
+
+The major system parameter to be reconfigured is the capacity of each memory
+level. At each time interval, we determine the upper bound of the capacity of
+memory level-i ($s_{iu}$) by mapping the demand bandwidth (DBW) of a specific
+application to the system's provided bandwidth curve, i.e.,
+$s_{iu}=f^{-1}(\textrm{DBW})$ where $f(x)$ represents the provided bandwidth
+curve of the on-chip memory system stored in the look-up-table in a reserved
+non-volatile memory space. The demand bandwidth for each memory level is
+generated using the prediction engine presented in section~\ref{sec:predict}. In
+previous sections, we show that the memory with smaller capacity provides higher
+bandwidth. Theoritically, the higher bandwidth provided by the memory system
+leads to higher performance (in terms of throughput) and power consumption of
+throughput computing applications~\cite{throughput-vs-bandwidth}. Consequently,
+we define a lower bound of memory capacity as
+$s_{il}=f^{-1}(\textrm{DBW}*(1+\sigma))$, where $\sigma$ is a pre-defined
+threshold to make sure possible provided bandwidth increase without much power
+overhead. The capacity of memory level-i ($s_i$) is therefore selected to
+satisfy $s_{il}\le s_i\le s_{iu}$.
+
+Figure~\ref{fig:reconfig} describes the hardware support for reconfiguration. 
+
+
+
+
 
 
 
 reconfiguration support: how reconfigurable (Li -> Li+1 (Li+0.5); hardware
-modification to support reconfiguration; what to do with reconfigured capacity
+modification to support reconfiguration.
 
-
-decide size of each level si:
-
-1) theoritical curves
-
-2) bound:
- 
-- dbwi < pbwi -> si <= s1
-
-- max throughput under power budget? -> si >= s2
-
-- si <= hardware given max si
-
-- si > si-1
 
 reconfigure the unused capacity:
 
