@@ -414,7 +414,25 @@ threshold to make sure possible provided bandwidth increase without much power
 overhead. The capacity of memory level-i ($s_i$) is therefore selected to
 satisfy $s_{il}\le s_i\le s_{iu}$.
 
-Figure~\ref{fig:reconfig} describes the hardware support for reconfiguration. 
+Our primary reconfigurable design exploits set associativity in conventional
+cache organizations. Figure~\ref{fig:reconfig} depicts the block diagram for the
+organization of our design. An n-way set associative cache consists of $n$ data
+and tag arrays. We divide the each level of on-chip memory into partitions at
+the granularity of the $k$-ways, where $k$ is determined by the number of
+available capacity values for a specific memory technology on the provided
+bandwidth curve. For example, if there are 8 available capacities for STT-RAM
+(from 2MB to 1GB), we will determine the granularity by $k=n/8$.The desirability
+of such configuration is to exploit the division of ways already present in a
+conventional cache organization.
+
+
+The index part of the input address is used to index all the
+ways of the data and tag array. The tag part of the input address is sent to the
+comparators of all the ways to determine if there is a match with any of the
+tags read from the tag array. If there is a match, a hit is signaled on the
+valid output line and data from the corresponding way of the data array is sent
+onto the output data lines.
+ 
 
 
 
