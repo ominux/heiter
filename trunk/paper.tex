@@ -399,9 +399,9 @@ time interval to accomodate different program phases of applications.
 
 The major system parameter to be reconfigured is the capacity of each memory
 level. At each time interval, we determine the upper bound of the capacity of
-memory level-i ($s_{iu}$) by mapping the demand bandwidth (DBW) of a specific
+memory level-i ($s_i^u$) by mapping the demand bandwidth (DBW) of a specific
 application to the system's provided bandwidth curve, i.e.,
-$s_{iu}=f^{-1}(\textrm{DBW})$ where $f(x)$ represents the provided bandwidth
+$s_i^u=f^{-1}(\textrm{DBW})$ where $f(x)$ represents the provided bandwidth
 curve of the on-chip memory system stored in the look-up-table in a reserved
 non-volatile memory space. The demand bandwidth for each memory level is
 generated using the prediction engine presented in section~\ref{sec:predict}. In
@@ -410,10 +410,10 @@ bandwidth. Theoritically, the higher bandwidth provided by the memory system
 leads to higher performance (in terms of throughput) and power consumption of
 throughput computing applications~\cite{throughput-vs-bandwidth}. Consequently,
 we define a lower bound of memory capacity as
-$s_{il}=f^{-1}(\textrm{DBW}*(1+\sigma))$, where $\sigma$ is a pre-defined
+$s_i^l=f^{-1}(\textrm{DBW}*(1+\sigma))$, where $\sigma$ is a pre-defined
 threshold to make sure possible provided bandwidth increase without much power
 overhead. The capacity of memory level-i ($s_i$) is therefore selected to
-satisfy $s_{il}\le s_i\le s_{iu}$. Furthermore, the rest of the capacity can be
+satisfy $s_i^l\le s_i\le s_i^u$. Furthermore, the rest of the capacity can be
 reconfigured to become level-i.5 if necessary. We describe the reconfiguration
 algorithm as follows.
 
