@@ -443,6 +443,17 @@ support the reconfiguration.
 
 \subsection{Prediction Engine}
 
+Memory reconfiguration relies on accurate predictions of demand bandwidth of a
+workload in response to the dynamically varying application characteristics.
+Conventional last value or table based predictors can model neither long range
+patterns of an application nor patterns with variable lengths. In this work, we
+employ a statistical predictor to support for the BAROM design. The basic idea
+of the predictor is borrowed from language modeling~\cite{smoothing-tech}. 
+
+
+
+ 
+hardware: global predictor sitting before caches
 statistical prediction
 
 hierarchical prediction
