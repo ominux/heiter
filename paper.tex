@@ -340,7 +340,7 @@ performance overhead. The rest of this section describes the BAROM design, which
 is composed of on-chip memory hierarchy hardware design, the reconfiguration
 mechanism, and the predictor engine.
 
-\subsection{Hardware Configuration}
+\subsection{Overview}
 
 Figure~\ref{fig:hw-config} shows an overview of BAROM hardware configuration.
 The CMP system consists of multiple cores, where L1 cahces are private to each
@@ -366,13 +366,14 @@ and L4 caches respectively. \vspace{5pt}
 \noindent{}{\bf{Capacity of each level.}} The maximum availabe capacity of each
 level is determined by the cross point of two memory technologies. In our case,
 the capacities of SRAM/L2, STT-RAM/L2, and RRAM/L4 are 2MB, 512MB, and 1GB
-respectively. At the system initialization, the capacity of each level is
-defined to be the maximum available capacity of the level. According to the
-reqirement of different applications, the capacities can be reconfigured at
-run-time to provide best performance. The memory space of each level can also be
-reconfigured to form an internal level as shown in Figure~\ref{fig:hw-config}.
-The hardware and software supports for reconfiguration will be presented in the
-following sections.\vspace{5pt}
+respectively. Each level of memory if further configured to be multiple banks
+the same way as the conventional cache design. At the system initialization, the
+capacity of each level is defined to be the maximum available capacity of the
+level. According to the reqirement of different applications, the capacities can
+be reconfigured at run-time to provide best performance. The memory space of
+each level can be reconfigured to form an internal level as shown in
+Figure~\ref{fig:hw-config}. The hardware and software supports for
+reconfiguration will be presented in the following sections.\vspace{5pt}
 
 The goal of such architecture design is to make use of different memory
 technologies to configure an on-chip memory system with optimal provided
@@ -412,45 +413,33 @@ we define a lower bound of memory capacity as
 $s_{il}=f^{-1}(\textrm{DBW}*(1+\sigma))$, where $\sigma$ is a pre-defined
 threshold to make sure possible provided bandwidth increase without much power
 overhead. The capacity of memory level-i ($s_i$) is therefore selected to
-satisfy $s_{il}\le s_i\le s_{iu}$.
+satisfy $s_{il}\le s_i\le s_{iu}$. Furthermore, the rest of the capacity can be
+reconfigured to become level-i.5 if necessary. We describe the reconfiguration
+algorithm as follows.
+
+<pseudocode>
 
 Our primary reconfigurable design exploits set associativity in conventional
-cache organizations. Figure~\ref{fig:reconfig} depicts the block diagram for the
-organization of our design. An n-way set associative cache consists of $n$ data
-and tag arrays. We divide the each level of on-chip memory into partitions at
-the granularity of the $k$-ways, where $k$ is determined by the number of
-available capacity values for a specific memory technology on the provided
-bandwidth curve. For example, if there are 8 available capacities for STT-RAM
-(from 2MB to 1GB), we will determine the granularity by $k=n/8$.The desirability
-of such configuration is to exploit the division of ways already present in a
-conventional cache organization.
+cache organizations. The desirability of such configuration is to exploit the
+division of ways already present in a conventional cache organization.
+Figure~\ref{fig:reconfig} depicts the block diagram for the organization of our
+design. An n-way set associative cache consists of $n$ data and tag arrays. We
+divide the each level of on-chip memory into partitions at the granularity of
+the $k$-ways, where $k$ is determined by the available capacity range of a
+specific memory technology on the provided bandwidth curve. <100+ ways?
+experiment section> Reconfiguration will not affect the bits of the address
+fields that are used as tag, index, and block offset bits. Modifications to the
+conventional cache architecture include:
 
-
-The index part of the input address is used to index all the
-ways of the data and tag array. The tag part of the input address is sent to the
-comparators of all the ways to determine if there is a match with any of the
-tags read from the tag array. If there is a match, a hit is signaled on the
-valid output line and data from the corresponding way of the data array is sent
-onto the output data lines.
- 
-
-
-
-
-
-
-
-reconfiguration support: how reconfigurable (Li -> Li+1 (Li+0.5); hardware
-modification to support reconfiguration.
-
-
-reconfigure the unused capacity:
-
-- if (> si): becomes si+1
-
-- else: unused (or becomes lut)
-
-
+\begin{itemize}
+\item \textbf{Memory status vector} At each memory level, the corrent
+configuration is stored in a memory status vector.
+\item \textbf{Input and output paths} The input and output data paths are
+duplicated. 
+\item \textbf{Additional multiplexors} Futhermore, additional wiring and
+multiplexors at address decoders and tag comparators are also required to
+support the reconfiguration.
+\end{itemize}
 
 \subsection{Prediction Engine}
 
