@@ -418,6 +418,12 @@ reconfigured to become level-i.5 if necessary. We describe the reconfiguration
 algorithm as follows.
 
 <pseudocode>
+if (si < stotali/2): 
+   if (si+1 <= stotali-si):
+      si.5 = stotali-si;
+
+else:
+   si+1 = ...;
 
 Our primary reconfigurable design exploits set associativity in conventional
 cache organizations. The desirability of such configuration is to exploit the
@@ -448,7 +454,21 @@ workload in response to the dynamically varying application characteristics.
 Conventional last value or table based predictors can model neither long range
 patterns of an application nor patterns with variable lengths. In this work, we
 employ a statistical predictor to support for the BAROM design. The basic idea
-of the predictor is borrowed from language modeling~\cite{smoothing-tech}. 
+of the predictor is borrowed from the n-Gram models, which are typically used by
+speech and natural language processing~\cite{smoothing-tech}. The n-Gram models
+are usually formulated as a probability distribution $p(s)$ over a strings $s$,
+and attemp to reflect how frequently the string occurs as a sentense. Prediction
+on a reasonable combination of strings is then generated based on the
+probability distribution. Our predictor employs the same basic idea, but
+simplifies the model for performance considerations. In our model, each demand
+bandwidth sample abtained in a time interval is a string, and a given length
+(the ``order'') of samples is stored in a table as a pattern. We calculate the
+probability of each pattern at each time interval, and predict the demand
+bandwidth for the next time interval based on the probabilities. 
+
+Figure~\ref{fig:predictor} shows the hardware components of our prediction
+engine, which includes a pattern look-up-table, a probability vector, and a set
+of counters.
 
 
 
