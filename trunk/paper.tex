@@ -464,8 +464,8 @@ language, and a given length (the ``order'') of samples is stored in a table as
 a pattern. At each time interval, the prediction engine will update the pattern
 table with the new DBW sample, and calculate probability of the updated pattern.
 The probability of a pattern $s$ of length $l$ can be calculated without loss as
-the product of a sequence of conditional probabilities using the following
-equation.
+the product of a sequence of conditional probabilities using the equation shown
+below.
 
 \begin{equation}
   p(s)=p(w_1)p(w_2|w_1)...p(w_l|w_1...w_{l-1})=\prod_{i=1}^{l}p(w_i|w_1...w_{i-1})\label{eq:pr1}
@@ -473,12 +473,24 @@ equation.
 where $w_l$ is the DBW sample obtained in current time interval, and $w_1$
 through $w_{l-1}$ are the preceding $l-1$ DBW samples. In n-gram models, we make
 the approximation that each conditional probability only depends on the
-preceding $n-1$ samples and obtain Equation~\ref{eq:pr2}.
+preceding $n-1$ samples and obtain the following equation.
 
 \begin{equation}
   p(s)=\prod_{i=1}^{l}p(w_i|w_{i-n+1}^{i-1})\label{eq:pr2}
 \end{equation}
-in which $w_{i-n+1}^{i-1}$ represents the sequence of $w_{i-n+1}...w_{i-1}$.
+in which $w_{i-n+1}^{i-1}$ denotes the sequence of $w_{i-n+1}...w_{i-1}$. In
+order to compute the result of Equation~\ref{eq:pr2}, an estimation of of
+$p(w_i|w_{i-n+1}^{i-1})$ can be generated using maximum likelihood~(ML)
+estimation method. In n-gram models, the largest n in wide use is n=3 which is
+called a trigram model. Therefore, we adopt n=3 in our predictor. Each
+conditional probability is calculated using ML estimation in
+Equation~\ref{eq:pr3}.
+
+\begin{equation}
+  \hat{p}(w_i|w_{i-n+1}^{i-1})=\frac{c(w_{i-2}^{i})}{c(w_{i-2}^{i-1})}\label{eq:pr3}
+\end{equation}
+where $c(w_{a}^{b})$ is the number of times that the sequence $w_a..w_b$ appears
+in preceding samples.
 
 The demand bandwidth in the next time interval is predicted based on the
 probabilities.
