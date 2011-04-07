@@ -38,8 +38,7 @@
   our method. The experimental results show that the proposed reconfigurable
   hybrid memory design improves the overall system throughput by \% compared to
   pure SRAM memory design. In addition, our design leads to \% throughput
-  increase and \% dynamic power reduction compared to hybrid but fixed memory
-  hierarchy design.
+  increase compared to hybrid but fixed memory hierarchy design.
 
 \end{abstract}
 
@@ -113,11 +112,9 @@ point of view, by leveraging these emerging memory technologies in devising a
 hybrid cache hierarchy. The contributions we present in this paper include:
 
 \begin{itemize}
-\item Bandwidth-aware hybrid on-chip memory hierarchy design.
-\item Hardware support that enables prediction of cache performance on the
-  different sized caches.
-\item OS scheduler support to make use of the prediction capability and
-  appropriately schedule applications on to core with suitable cache capacity.
+\item Bandwidth-aware hybrid on-chip memory hierarchy design...
+\item Reconfiguration...
+\item Prediction engine...
 
 \end{itemize}
 
@@ -326,21 +323,22 @@ design. While many design methods envolved with new memory technologies endeavor
 to reduce the off-chip memory access latency, this work focuses on minimize
 off-chip bandwidth requirement by employing hybrid on-chip memory and
 reconfiguration. For each level of memory, we select the memory technology that
-has the highest provided bandwidth within given capacity. On top of such
-hardware hierarchy design, we apply dynamic memory system reconfiguration with
-the bandwidth demand of a specific set of applications as the major metric. One
-desirable characteristic of BAROM is that it provides prioritized access to the
-residual memory capacity available at runtime instead of sharing it among all
-data flows. By having control over the residual capacity, we can better utilize
-the limited resources to enhance system performance. The hardware
-reconfiguration is further facilitated by software prediction engine. Rather
-than conventional last value predictors and table-based predictors, we employ a
-probablity-based predictor that can achieve higher accuracy with small
-performance overhead. The rest of this section describes the BAROM design, which
-is composed of on-chip memory hierarchy hardware design, the reconfiguration
-mechanism, and the predictor engine.
+has the highest provided bandwidth within given capacity. The total capacity of
+each level is then partitioned to subsets of ways with different provided
+bandwidths. On top of such hardware hierarchy design, we apply dynamic memory
+system reconfiguration with the bandwidth demand of a specific set of
+applications as the major metric. One desirable characteristic of BAROM is that
+it provides prioritized access to the residual memory capacity available at
+runtime instead of sharing it among all memory accesses. By having control over
+the residual capacity, we can better utilize the limited resources to enhance
+system performance. The hardware reconfiguration is further facilitated by a
+prediction engine. Rather than conventional last value or history table based
+predictors, we employ a probablity-based statistical predictor which can achieve
+higher accuracy with small performance overhead. The rest of this section
+describes the BAROM design, which is composed of on-chip memory hierarchy
+design, the reconfiguration mechanism, and the prediction engine.
 
-\subsection{Overview}
+\subsection{Memory Hierarchy Design}
 
 Figure~\ref{fig:hw-config} shows an overview of BAROM hardware configuration.
 The CMP system consists of multiple cores, where L1 cahces are private to each
@@ -485,6 +483,15 @@ entry)
 
 % -------------------------------------------------------------------------
 \section{Experiments}
+
+1. nvsim memory bandwidth vs. way-configuration -> reasonable fast ways and slow
+ways for reconfiguration 
+
+2. predictor accuracy vs. benchmarks
+
+3. performance of instruction throughput vs. benchmarks
+
+------------------------------------
 
 Based on the parameters of different cache configurations collected from our
 modified version of CACTI~\cite{CACTI}, we evaluate both pure SRAM-based and
