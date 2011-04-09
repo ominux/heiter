@@ -21,11 +21,74 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
+\bibitem{McKee:2004:RMW}
+S.~A. McKee, ``Reflections on the memory wall,'' in \emph{Proceedings of the
+  Conference on Computing Frontiers}, 2004, p. 162.
+
+\bibitem{Burger:1996:MBLFM}
+D.~Burger, J.~R. Goodman, and A.~K\"{a}gi, ``Memory bandwidth limitations of
+  future microprocessors,'' in \emph{Proceedings of the International Symposium
+  on Computer Architecture}, 1996, pp. 78--89.
+
+\bibitem{Rogers:2009:SBW}
+B.~M.~R. et~al, ``Scaling the bandwidth wall: challenges in and avenues for cmp
+  scaling,'' in \emph{Proceedings of the International Symposium on Computer
+  Architecture}, 2009.
+
+\bibitem{Huh:2001:EDSFC}
+J.~Huh, D.~Burger, and S.~W. Keckler, ``Exploring the design space of future
+  {CMPs},'' in \emph{Proceedings of the International Conference on Parallel
+  Architectures and Compilation Techniques}, 2001, pp. 199--210.
+
+\bibitem{Lindholm:2008:Tesla}
+E.~Lindholm, J.~Nickolls, S.~Oberman, and J.~Montrym, ``Nvidia tesla: a unified
+  graphics and computing architecture,'' \emph{IEEE Micro}, vol.~28, pp.
+  39--55, 2008.
+
+\bibitem{Sun:2009:E3DSL2}
+G.~Sun, X.~Wu, and Y.~Xie, ``{Exploration of 3D stacked L2 cache design for
+  high performance and efficient thermal control},'' in \emph{Proceedings of
+  the International Symposium on Low Power Electronics and Design}, 2009, pp.
+  295--298.
+
 \bibitem{Sun:2009:MRAM-L2-CMP}
 G.~Sun, X.~Dong, Y.~Xie, J.~Li, and Y.~Chen, ``A novel architecture of the {3D}
   stacked {MRAM} {L2} cache for {CMPs},'' in \emph{Proceedings of the
   International Conference on High-Performance Computer Architecture}, 2009,
   pp. 239--249.
+
+\bibitem{Wu:2009:HCA}
+X.~Wu, J.~Li, L.~Zhang, E.~Speight, R.~Rajamony, and Y.~Xie, ``Hybrid cache
+  architecture with disparate memory technologies,'' in \emph{Proceedings of
+  the International Symposium on Computer Architecture}, 2009, pp. 34--45.
+
+\bibitem{Sun:2009:NA3D}
+G.~Sun, X.~Dong, Y.~Xie, J.~Li, and Y.~Chen, ``{A novel architecture of the 3D
+  stacked MRAM L2 cache for CMPs},'' in \emph{Proceedings of the International
+  Symposium on High Performance Computer Architecture}, 2009, pp. 239--249.
+
+\bibitem{Zhou:2004:DTP}
+P.~Zhou, V.~Pandey, J.~Sundaresan, A.~Raghuraman, Y.~Zhou, and S.~Kumar,
+  ``Dynamic tracking of page miss ratio curve for memory management,'' in
+  \emph{Proceedings of the International Conference on Architectural Support
+  for Programming Languages and Operating Systems}, 2004, pp. 177--188.
+
+\bibitem{Duesterwald:2003:CPP}
+E.~Duesterwald, C.~Cascaval, and S.~Dwarkadas, ``Characterizing and predicting
+  program behavior and its variability,'' in \emph{Proceedings of the
+  International Conference on Parallel Architectures and Compilation
+  Techniques}, 2003, p. 220.
+
+\bibitem{Sarikaya:2007:PPB}
+R.~Sarikaya and A.~Buyuktosunoglu, ``Predicting program behavior based on
+  objective function minimization,'' in \emph{Proceedings of the International
+  Symposium on Workload Characterization}, 2007, pp. 25--34.
+
+\bibitem{Sarikaya:2010:RWB}
+R.~Sarikaya, C.~Isci, and A.~Buyuktosunoglu, ``Runtime workload behavior
+  prediction using statistical metric modeling with application to dynamic
+  power management,'' in \emph{Proceedings of the International Symposium on
+  Workload Characterization}, 2010, pp. 1--10.
 
 \bibitem{memristor:chua}
 L.~Chua, ``{Memristor: The missing circuit element},'' \emph{IEEE Transactions
