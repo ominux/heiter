@@ -48,11 +48,12 @@
 
 One potential bottleneck for chip-multiprocessor~(CMP) performance scaling is
 the widening gap between the bandwidth demand created by processor cores and the
-limited access bandwidth provided by off-chip main memory [15][16][6][20]. Such
-limitation greatly affects the parallelism of memory demanding applications,
-i.e., applications with a large working set, by consuming additional cycles on
-off-chip memory access. In addition, even moderate memory demand applications
-will be affected as the number of cores scales up [17]. The continuing shrink of
+limited access bandwidth provided by off-chip main
+memory~\cite{McKee:2004:RMW,Burger:1996:MBLFM,Rogers:2009:SBW}. Such limitation greatly affects
+the parallelism of memory demanding applications, i.e., applications with a
+large working set, by consuming additional cycles on off-chip memory access. In
+addition, even moderate memory demand applications will be affected as the
+number of cores scales up~\cite{Huh:2001:EDSFC}. The continuing shrink of
 transistor density not only leads to increasingly powerful processors with a
 large number of cores, but also puts much bandwidth pressure to off-chip main
 memory. However, the bandwidth to the off-chip main memory does not improve much
@@ -62,39 +63,30 @@ applications running on the computing systems be bandwidth-bound at main memory.
 While a number techniques can be found in today's systems and research work to
 alleviate such bandwidth bottleneck, few can improve the system throughput in a
 power and cost efficient manner. High performance computing machines such as
-NVIDIA's Tesla~\cite{nvidia:tesla} rely on very high main memory bandwidths
-(provided by GDDR memories) to feed the requirement from the processor. However,
-GDDR memories run at higher clock rates and are more power hungry than
-conventional DRAM modules. It is undesirable for either general purpose or high
-performance computing systems to improve their computing performance by
-sacrificing power efficiency. With the emerging 3D chip technology, caches can
-be stacked on top of processor cores to provide high memory
-bandwidth[12][21][22]. However, ...
+NVIDIA's Tesla~\cite{Lindholm:2008:Tesla} rely on very high main memory
+bandwidths (provided by GDDR memories) to feed the requirement from the
+processor. However, GDDR memories run at higher clock rates and are more power
+hungry than conventional DRAM modules. It is undesirable for either general
+purpose or high performance computing systems to improve their computing
+performance by sacrificing power efficiency. With the emerging 3D chip
+technology, caches can be stacked on top of processor cores to provide high
+memory bandwidth~\cite{Sun:2009:E3DSL2}. However, ...
 
 Caching has long been employed as the most effective approach to reduce memory
 access latency. Proper on-chip memory hierarchy design, however, can also help
-alleviate the increasing bandwidth pressure of off-chip memory. In [dac.1] the
-authors discuss extensively the problem of limited pin bandwidth to
-multiprocessor systems. They have focused on program performance in
-multiprocessor systems and make detailed decomposition of program execution
-times. They conclude that even more complex on-chip cache structures would prove
-to be costeffective, with the limited pin bandwidth severely restricting
-performance increases. In [dac.2] the authors have carefully studied the
-requirements for on-chip cache structures along with all sorts of optimization
-techniques that come along with scaling of processor core numbers. Their study
-shows that cache size need to grow much faster than processor core numbers to
-compensate for the limited off-chip bandwidth. Because of that, the near future
-processors need to allocate a huge percentage of chip area for caches, which
-means much less core counts than expected. The study also shows that effective
-bandwidth optimization techniques can help reduce cache size requirement and
-thus help scaling processor cores. However, the effectiveness of caching in the
-mid/large scale multiprocessor systems could be highly suboptimal due to
-significant contention across the parallel tasks. The more bandwidth requirement
-by a workload can be satisfied by the last level cache~(LLC), the less bandwidth
-will be required from the off-chip main memory. Our memory technology
-pre-exploration shows that the bandwidth provided by a memory decreases with the
-increase of its capacity. Based on these observations, adding more levels of
-cache can potentially fill in the bandwidth gap.
+alleviate the increasing bandwidth pressure of off-chip memory. After an
+extensive study the problem of limited pin bandwidth to multiprocessor systems,
+Burger \emph{et al.} conclude that even more complex on-chip cache structures
+would prove to be costeffective with the limited pin bandwidth severely
+restricting performance increases~\cite{Burger:1996:MBLFM}. The requirements of
+on-chip cache structures along with all sorts of optimization techniques that
+come along with scaling of processor core numbers are carefully
+explored~\cite{Rogers:2009:SBW}. The study shows that cache size need to grow
+much faster than processor core numbers to compensate the limited off-chip
+bandwidth. The study also shows that effective bandwidth optimization techniques
+can help reduce cache size requirement and thus help scaling processor cores.
+Consequently, it is critical to re-design the on-chip memory system, which
+focuses on bandwidth optimization.
 
 On-chip caches with fast random access, high storage density, and non-volatility
 become possible due to the emergence of various new non-volatile memory~(NVM)
@@ -142,24 +134,25 @@ design.
 
 A large body of recent research focuses on exploring new memory technologies to
 trade off between latency, bandwidth, and cost. Wu et al. explored various
-memory technologies - SRAM, eDRAM [23], magnetic RAM (MRAM) [12] and PCM to best
-construct L3 caches in terms of performance and power [24]. The eDRAM and MRAM
-technologies are evaluated as LLCs by stacking each memory on top of the
-processor die. Both studies mainly focused on reducing the latency gap between
-L2 cache~(LLC) and external memory, but do not examine the design from bandwidth
-perspective.
+memory technologies - SRAM, eDRAM~\cite{Wu:2009:HCA}, and
+STT-RAM~\cite{Sun:2009:NA3D} to best construct L3 caches in terms of performance
+and power. The eDRAM and STT-RAM technologies are evaluated as LLCs by stacking
+each memory on top of the processor die. Both studies mainly focused on reducing
+the latency gap between L2 cache~(LLC) and external memory, but do not examine
+the design from bandwidth perspective.
 
 Application behavior prediction is a critical component of reconfigurable
 architectures. Zhou \emph{et al.} monitored memory access patterns and estimated
-memory behavior of workloads for energy efficient memory allocation
-[predictor.26]. Duesterwald et al. [10] describe different statistical and table
-based predictors for within- and across-metric predictions of performance
-monitoring information. They show that the table-based predictor generally
-outperforms the other predictors they tested. Sarikaya et al. [19] describe an
-optimal prediction technique based on a predictive least squares minimization.
-Sarikaya \emph{et al.} showed the benefit of statistical metric modeling for
-tracking varying pattern history lengths and modeling long term
-patterns~\cite{Sarikaya:2011:RWBP}. However, ...
+memory behavior of workloads for energy efficient memory
+allocation~\cite{Zhou:2004:DTP}. Duesterwald \emph{et al.} describe different
+statistical and table based predictors for within- and across-metric predictions
+of performance monitoring information~\cite{Duesterwald:2003:CPP}. They show
+that the table-based predictor generally outperforms the other predictors they
+tested. Sarikaya \emph{et al.}describe an optimal prediction technique based on
+a predictive least squares minimization~\cite{Sarikaya:2007:PPB}. Sarikaya
+\emph{et al.} showed the benefit of statistical metric modeling for tracking
+varying pattern history lengths and modeling long term
+patterns~\cite{Sarikaya:2010:RWB}. However, ...
 
 % -----------------------------------------------------------------------------
 
@@ -194,7 +187,8 @@ resistance of MTJ is high, indicating a ``1'' state. \vspace{0.1in}
 % \begin{figure}[t]
 % \centering
 % \includegraphics[width=2.5in]{figures/GST}
-% \caption{The schematic view of a PCRAM cell with MOSFET selector transistor (BL=Bitline, WL=Wordline, SL=Sourceline}
+% \caption{The schematic view of a PCRAM cell with MOSFET selector transistor
+% (BL=Bitline, WL=Wordline, SL=Sourceline}
 % \label{fig:GST}
 % \end{figure}
 
