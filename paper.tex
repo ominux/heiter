@@ -67,34 +67,34 @@ NVIDIA's Tesla~\cite{nvidia:tesla} rely on very high main memory bandwidths
 GDDR memories run at higher clock rates and are more power hungry than
 conventional DRAM modules. It is undesirable for either general purpose or high
 performance computing systems to improve their computing performance by
-sacrifacing power efficiency. With the emerging 3D chip technology, caches can
+sacrificing power efficiency. With the emerging 3D chip technology, caches can
 be stacked on top of processor cores to provide high memory
 bandwidth[12][21][22]. However, ...
 
 Caching has long been employed as the most effective approach to reduce memory
-access latency. Adding an extra level of cache, however, can also help alleviate
-the increasing bandwidth pressure of off-chip memory. In [dac.1] the authors
-discuss extensively the problem of limited pin bandwidth to multiprocessor
-systems. They have focused on program performance in multiprocessor systems and
-make detailed decomposition of program execution times. They conclude that even
-more complex on-chip cache structures would prove to be costeffective, with the
-limited pin bandwidth severely restricting performance increases. In [dac.2] the
-authors have carefully studied the requirements for on-chip cache structures
-along with all sorts of optimization techniques that come along with scaling of
-processor core numbers. Their study shows that cache size need to grow much
-faster than processor core numbers to compensate for the limited off-chip
-bandwidth. Because of that, the near future processors need to allocate a huge
-percentage of chip area for caches, which means much less core counts than
-expected. The study also shows that effective bandwidth optimization techniques
-can help reduce cache size requirement and thus help scaling processor cores.
-However, the effectiveness of caching in the mid/large scale multiprocessor
-systems could be highly suboptimal due to significant contention across the
-parallel tasks. The more bandwidth requirement by a workload can be satisfied by
-the last level cache~(LLC), the less bandwidth will be required from the
-off-chip main memory. Our memory technology pre-exploration shows that the
-bandwidth provided by a memory decreases with the increase of its capacity.
-Based on these observations, adding more levels of cache can potentially fill in
-the bandwidth gap.
+access latency. Proper on-chip memory hierarchy design, however, can also help
+alleviate the increasing bandwidth pressure of off-chip memory. In [dac.1] the
+authors discuss extensively the problem of limited pin bandwidth to
+multiprocessor systems. They have focused on program performance in
+multiprocessor systems and make detailed decomposition of program execution
+times. They conclude that even more complex on-chip cache structures would prove
+to be costeffective, with the limited pin bandwidth severely restricting
+performance increases. In [dac.2] the authors have carefully studied the
+requirements for on-chip cache structures along with all sorts of optimization
+techniques that come along with scaling of processor core numbers. Their study
+shows that cache size need to grow much faster than processor core numbers to
+compensate for the limited off-chip bandwidth. Because of that, the near future
+processors need to allocate a huge percentage of chip area for caches, which
+means much less core counts than expected. The study also shows that effective
+bandwidth optimization techniques can help reduce cache size requirement and
+thus help scaling processor cores. However, the effectiveness of caching in the
+mid/large scale multiprocessor systems could be highly suboptimal due to
+significant contention across the parallel tasks. The more bandwidth requirement
+by a workload can be satisfied by the last level cache~(LLC), the less bandwidth
+will be required from the off-chip main memory. Our memory technology
+pre-exploration shows that the bandwidth provided by a memory decreases with the
+increase of its capacity. Based on these observations, adding more levels of
+cache can potentially fill in the bandwidth gap.
 
 On-chip caches with fast random access, high storage density, and non-volatility
 become possible due to the emergence of various new non-volatile memory~(NVM)
@@ -103,7 +103,7 @@ memory~(PCRAM), and resistive memory~(RRAM). These emerging memory technologies
 are believed to be promising solution as on-chip
 caches~\cite{Sun:2009:MRAM-L2-CMP}. In addition to the benefit of
 non-volatility, we demonstrate that these memory technologies provide higher
-bandwidth than SRAM at a high capacity. Consequently, it is beneficial to use
+bandwidth than SRAM at a large capacity. Consequently, it is beneficial to use
 NVM as lower level caches when large capacity.
 
 This paper presents a bandwidth-aware memory hierarchy design to enhance system
@@ -125,7 +125,7 @@ hybrid cache hierarchy. The contributions we present in this paper include:
 The bandwidth problem of multicore processors has drawn much attention recently.
 Yu \emph{et al.} proposed a LLC partitioning algorithm to minimize bandwidth
 requirement to off-chip main memory~\cite{Yu:2010:OCMB}. While most cache
-partitioning techniques focus on cache miss rates, our work takes a different
+partitioning techniques focus on cache miss rates, their work takes a different
 approach in which tasks¡¯ memory bandwidth requirements are taken into account
 when identifying a cache partitioning for multi-programmed and/or multithreaded
 workloads. Cache resources are allocated with the objective that the overall
@@ -319,8 +319,8 @@ capacity. For example,
 \section{Design Method}
 
 Based on our memory technology exploration, we now provide an overview of BAROM
-design. While many design methods envolved with new memory technologies endeavor
-to reduce the off-chip memory access latency, this work focuses on minimize
+design. While many design methods involved with new memory technologies endeavor
+to reduce the off-chip memory access latency, this work focuses on minimizing
 off-chip bandwidth requirement by employing hybrid on-chip memory and
 reconfiguration. For each level of memory, we select the memory technology that
 has the highest provided bandwidth within given capacity. The total capacity of
@@ -333,10 +333,10 @@ runtime instead of sharing it among all memory accesses. By having control over
 the residual capacity, we can better utilize the limited resources to enhance
 system performance. The hardware reconfiguration is further facilitated by a
 prediction engine. Rather than conventional last value or history table based
-predictors, we employ a probablity-based statistical predictor which can achieve
-higher accuracy with small performance overhead. The rest of this section
-describes the BAROM design, which is composed of on-chip memory hierarchy
-design, the reconfiguration mechanism, and the prediction engine.
+predictors, we employ a probability-based statistical predictor which can
+achieve higher accuracy with small performance overhead. The rest of this
+section describes the BAROM design, which is composed of on-chip memory
+hierarchy design, the reconfiguration mechanism, and the prediction engine.
 
 \subsection{Memory Hierarchy Design}
 
