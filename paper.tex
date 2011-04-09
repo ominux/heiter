@@ -132,19 +132,22 @@ workloads. Cache resources are allocated with the objective that the overall
 system bandwidth requirement is minimized for the target workload. The key
 insight is that cache miss-rate information may severely misrepresent the actual
 bandwidth demand of the task, which ultimately determines the overall system
-performance and power consumption. <the moguls paper, the figure 1, however design for
-induvidual application, i.e., with different application can generate different
-designs.>
+performance and power consumption. However, their work only focused on LLC (L2
+cache). Our design targe is the overall on-chip memory system, which provides
+more design dimensions and flexibility. An analytical performance model was
+proposed by Sun et al. to explore the design space of memory hierarchies for
+throughput computing [moguls]. However, their memory hierarchy design was
+tailored for individual applications, which was undesirable for a real system
+design.
 
 A large body of recent research focuses on exploring new memory technologies to
 trade off between latency, bandwidth, and cost. Wu et al. explored various
 memory technologies - SRAM, eDRAM [23], magnetic RAM (MRAM) [12] and PCM to best
 construct L3 caches in terms of performance and power [24]. The eDRAM and MRAM
 technologies are evaluated as LLCs by stacking each memory on top of the
-processor die. Both studies mainly focused on reducing the latency gap between L2
-cache~(LLC) and external memory and do not examine the bandwidth. <nvm cache
-research: most for latency, not bandwidth opt.>
-
+processor die. Both studies mainly focused on reducing the latency gap between
+L2 cache~(LLC) and external memory, but do not examine the design from bandwidth
+perspective.
 
 Application behavior prediction is a critical component of reconfigurable
 architectures. Zhou \emph{et al.} monitored memory access patterns and estimated
