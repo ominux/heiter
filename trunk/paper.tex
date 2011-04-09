@@ -460,8 +460,13 @@ speech and natural language processing~\cite{smoothing-tech}. The n-gram models
 are usually formulated as a probability distribution $p(s)$ over a strings $s$,
 and attemp to reflect how frequently the string occurs as a sentense. Prediction
 on a reasonable combination of strings is then generated based on the
-probability distribution. Our predictor employs the same basic idea, but
-simplifies the model for performance considerations. In our model, each demand
+probability distribution. Our predictor employs the same basic idea, but with
+very different implementation considerations. While language modeling is built
+from a set of previous collected training sentenses with finite lengths, our
+statistical model needs to be able to dynamically generate prediction based on a
+continuous sequence of metrics. In addition, we can only implement limited
+resolution for the metrics. Therefore, we need to normalize the demand bandwidth
+values with a limited number of quantization bins. In our model, each demand
 bandwidth (DBW) sample abtained in a time interval is analogous to a string in
 language, and a given length (the ``order'') of samples is stored in a table as
 a pattern. At each time interval, the prediction engine will update the pattern
@@ -493,27 +498,19 @@ Equation~\ref{eq:pr3}.
   \hat{p}(w_i|w_{i-n+1}^{i-1})=\frac{c(w_{i-2}^{i})}{c(w_{i-2}^{i-1})}\label{eq:pr3}
 \end{equation}
 where $c(w_{a}^{b})$ is the number of times that the sequence $w_a..w_b$ appears
-in preceding samples.
-
-The demand bandwidth in the next time interval is predicted based on the
-probabilities.
+in preceding samples. The demand bandwidth in the next time interval is
+predicted to be the last value in the pattern with the highest probability.
 
 Figure~\ref{fig:predictor} shows the hardware components of our prediction
 engine, which includes a pattern look-up-table, a probability vector, and a set
-of counters.
+of counters. The storage overhead
 
 The algorithm of the predictor is described in Figure~\ref{algo:predictor}.
 
 <pseudocode>
 
- 
-hardware: global predictor sitting before caches
-statistical prediction
-
-hierarchical prediction
-
-performance opt: lut long enough but not too long (num of entries, bits per
-entry)
+The computational complexity can be estimated as $O(ql)$, where $q$ is the
+number of quantization bins.
 
 % -------------------------------------------------------------------------
 \section{Experiments}
