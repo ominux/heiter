@@ -344,7 +344,7 @@ hierarchy design, the reconfiguration mechanism, and the prediction engine.
 \label{fig:overview}
 \end{figure}
 
-Figure~\ref{fig:overview} shows an overview of BAROM hardware configuration.
+Figure~\ref{fig:overview} depicts an overview of BAROM hardware configuration.
 The CMP system consists of multiple cores, where L1 cahces are private to each
 core and lower level caches are shared by the cores. With the provided bandwidth
 vs. capacity curves of various memory technologies that are obtained using the
@@ -410,14 +410,13 @@ generated using the prediction engine presented in section~\ref{sec:predict}. In
 previous sections, we show that the memory with smaller capacity provides higher
 bandwidth. Theoritically, the higher bandwidth provided by the memory system
 leads to higher performance (in terms of throughput) and power consumption of
-throughput computing applications~\cite{throughput-vs-bandwidth}. Consequently,
-we define a lower bound of memory capacity as
-$s_i^l=f^{-1}(\textrm{DBW}*(1+\sigma))$, where $\sigma$ is a pre-defined
-threshold to make sure possible provided bandwidth increase without much power
-overhead. The capacity of memory level-i ($s_i$) is therefore selected to
-satisfy $s_i^l\le s_i\le s_i^u$. Furthermore, the rest of the capacity can be
-reconfigured to become level-i.5 if necessary. We describe the reconfiguration
-algorithm as follows.
+throughput computing applications. Consequently, we define a lower bound of
+memory capacity as $s_i^l=f^{-1}(\textrm{DBW}*(1+\sigma))$, where $\sigma$ is a
+pre-defined threshold to make sure possible provided bandwidth increase without
+much power overhead. The capacity of memory level-i ($s_i$) is therefore
+selected to satisfy $s_i^l\le s_i\le s_i^u$. Furthermore, the rest of the
+capacity can be reconfigured to become level-i.5 if necessary. We describe the
+reconfiguration algorithm as follows.
 
 <pseudocode>
 if (si < stotali/2): 
@@ -425,12 +424,12 @@ if (si < stotali/2):
       si.5 = stotali-si;
 
 else:
-   si+1 = ...;
+si+1 = ...;
 
 Our primary reconfigurable design exploits set associativity in conventional
 cache organizations. The desirability of such configuration is to exploit the
 division of ways already present in a conventional cache organization.
-Figure~\ref{fig:reconfig} depicts the block diagram for the organization of our
+Figure~\ref{fig:overview} shows the block diagram for the organization of our
 design. An n-way set associative cache consists of $n$ data and tag arrays. We
 divide the each level of on-chip memory into partitions at the granularity of
 the $k$-ways, where $k$ is determined by the available capacity range of a
@@ -457,7 +456,7 @@ Conventional last value or table based predictors can model neither long range
 patterns of an application nor patterns with variable lengths. In this work, we
 employ a statistical predictor to support for the BAROM design. The basic idea
 of the predictor is borrowed from the n-Gram models, which are typically used by
-speech and natural language processing~\cite{smoothing-tech}. The n-gram models
+speech and natural language processing~\cite{Chen:1996:ESS}. The n-gram models
 are usually formulated as a probability distribution $p(s)$ over a strings $s$,
 and attemp to reflect how frequently the string occurs as a sentense. Prediction
 on a reasonable combination of strings is then generated based on the
@@ -504,7 +503,14 @@ predicted to be the last value in the pattern with the highest probability.
 
 Figure~\ref{fig:predictor} shows the hardware components of our prediction
 engine, which includes a pattern look-up-table, a probability vector, and a set
-of counters. The storage overhead
+of counters. The storage overhead...
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=5in]{figures/predictor}
+\caption{Components of prediction engine.}
+\label{fig:predictor}
+\end{figure*}
 
 The algorithm of the predictor is described in Figure~\ref{algo:predictor}.
 
