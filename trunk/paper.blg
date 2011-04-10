@@ -6,53 +6,51 @@ Database file #1: ./bib/ref.bib
 Database file #2: ./bib/reram.bib
 Database file #3: ./bib/cacti.bib
 Warning--I didn't find a database entry for "Yu:2010:OCMB"
-Warning--I didn't find a database entry for "throughput-vs-bandwidth"
-Warning--I didn't find a database entry for "smoothing-tech"
 -- IEEEtran.bst version 1.12 (2007/01/11) by Michael Shell.
 -- http://www.michaelshell.org/tex/ieeetran/bibtex/
 -- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
 Warning--empty booktitle in CACTI
 
 Done.
-You've used 22 entries,
+You've used 23 entries,
             4024 wiz_defined-function locations,
-            946 strings with 11792 characters,
-and the built_in function-call counts, 18448 in all, are:
-= -- 1404
-> -- 473
-< -- 155
-+ -- 257
-- -- 82
-* -- 867
-:= -- 2578
-add.period$ -- 44
-call.type$ -- 22
-change.case$ -- 22
-chr.to.int$ -- 387
-cite$ -- 23
-duplicate$ -- 1303
-empty$ -- 1623
-format.name$ -- 100
-if$ -- 4342
+            950 strings with 11967 characters,
+and the built_in function-call counts, 19323 in all, are:
+= -- 1473
+> -- 490
+< -- 164
++ -- 267
+- -- 84
+* -- 906
+:= -- 2696
+add.period$ -- 46
+call.type$ -- 23
+change.case$ -- 23
+chr.to.int$ -- 411
+cite$ -- 24
+duplicate$ -- 1363
+empty$ -- 1702
+format.name$ -- 103
+if$ -- 4551
 int.to.chr$ -- 0
-int.to.str$ -- 22
-missing$ -- 231
-newline$ -- 89
-num.names$ -- 22
-pop$ -- 587
+int.to.str$ -- 23
+missing$ -- 240
+newline$ -- 92
+num.names$ -- 23
+pop$ -- 610
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 2
-skip$ -- 1448
+skip$ -- 1519
 stack$ -- 0
-substring$ -- 935
-swap$ -- 1033
-text.length$ -- 26
+substring$ -- 992
+swap$ -- 1082
+text.length$ -- 27
 text.prefix$ -- 0
 top$ -- 5
-type$ -- 22
+type$ -- 23
 warning$ -- 1
-while$ -- 95
-width$ -- 24
-write$ -- 223
-(There were 4 warnings)
+while$ -- 100
+width$ -- 25
+write$ -- 232
+(There were 2 warnings)

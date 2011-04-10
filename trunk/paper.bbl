@@ -122,6 +122,11 @@ X.~Dong, N.~P. Jouppi, and Y.~Xie, ``{PCRAMsim: System-level performance,
 V.~Mohan, S.~Gurumurthi, and M.~R. Stan, ``{FlashPower: A detailed power model
   for NAND flash memory},'' in \emph{DATE}, 2010, pp. 502--507.
 
+\bibitem{Chen:1996:ESS}
+S.~F. Chen and J.~Goodman, ``An empirical study of smoothing techniques for
+  language modeling,'' in \emph{Proceedings of the Annual Meeting on
+  Association for Computational Linguistics}, 1996, pp. 310--318.
+
 \bibitem{Magnusson:2002:simics-orig-paper}
 P.~S. Magnusson, M.~Christensson, J.~Eskilson, D.~Forsgren, G.~Hallberg,
   J.~Hogberg, F.~Larsson, A.~Moestedt, and B.~Werner, ``Simics: a full system
