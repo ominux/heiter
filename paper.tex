@@ -337,7 +337,14 @@ hierarchy design, the reconfiguration mechanism, and the prediction engine.
 
 \subsection{Memory Hierarchy Design}
 
-Figure~\ref{fig:hw-config} shows an overview of BAROM hardware configuration.
+\begin{figure}[t]
+\centering
+\includegraphics[width=2.5in]{figures/overview}
+\caption{Overview of BAROM hardware configuration.}
+\label{fig:overview}
+\end{figure}
+
+Figure~\ref{fig:overview} shows an overview of BAROM hardware configuration.
 The CMP system consists of multiple cores, where L1 cahces are private to each
 core and lower level caches are shared by the cores. With the provided bandwidth
 vs. capacity curves of various memory technologies that are obtained using the
@@ -367,7 +374,7 @@ capacity of each level is defined to be the maximum available capacity of the
 level. According to the reqirement of different applications, the capacities can
 be reconfigured at run-time to provide best performance. The memory space of
 each level can be reconfigured to form an internal level as shown in
-Figure~\ref{fig:hw-config}. The hardware and software supports for
+Figure~\ref{fig:overview}. The hardware and software supports for
 reconfiguration will be presented in the following sections.\vspace{5pt}
 
 The goal of such architecture design is to make use of different memory
